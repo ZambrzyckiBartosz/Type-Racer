@@ -30,18 +30,17 @@
 ### Setup & Run
 
 1. **Clone the repository:**
-   git clone https://github.com/ZambrzyckiBartosz/Type-Racing.git
-   cd Type-Racing
+    ```bash
+     git clone https://github.com/ZambrzyckiBartosz/Type-Racer.git
+     cd Type-Racer
+    ```
 
-2. **Start the Backend (.NET):**
-   cd typeracer-server
-   dotnet run
-
-3. **Start the Frontend (React):**
-   Open a new terminal:
-   cd typeracer-client
-   npm install
-   npm start
+2. **Start Docker:**
+   ```bash
+   docker compose build
+   docker compose up
+   ```
+3. **Enter localhost on browser**
 
 ## Usage
 
