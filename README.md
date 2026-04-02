@@ -26,7 +26,7 @@
 ### Prerequisites
 - .NET 10 SDK
 - Node.js & npm
-
+- Docker
 ### Setup & Run
 
 1. **Clone the repository:**
