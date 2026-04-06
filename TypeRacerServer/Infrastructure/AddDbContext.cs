@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace TypeRacerServer;
+namespace TypeRacerServer.Infrastructure;
 
 public class User
 {
