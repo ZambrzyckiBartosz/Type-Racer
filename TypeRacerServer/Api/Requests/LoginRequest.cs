@@ -1,9 +1,9 @@
-
+using TypeRacerServer.Api.ValueObjects;
 
 namespace TypeRacerServer.Api.Requests;
 
 public class LoginRequest
 {
-    public string Username { get; set; } = string.Empty;
-    public string Password{ get; set; } = string.Empty;
+    public Username Username { get; set; } = string.Empty;
+    public Password Password{ get; set; } = string.Empty;
 }

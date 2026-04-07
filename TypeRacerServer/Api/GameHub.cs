@@ -1,46 +1,14 @@
 using Microsoft.AspNetCore.SignalR;
 using TypeRacerServer.Core.Services;
 using Microsoft.AspNetCore.Authorization;
-using TypeRacerServer.Core.Services;
 namespace TypeRacerServer;
 
 [Authorize]
 
-public class GameHub : Hub
+public class GameHub(IHubContext<GameHub> _hubContext, JoinRoomService _joinRoomService, StartRoomGameService _startRoomGameService,PerformCleanupService _performCleanupService,
+    SendProgressService _sendProgressService, PowerUpService _powerUpService, RestartGameService _restartGameService, ChangeRoomSettingsService _changeSettingsService,
+    EndGameProcessService _endGameService) : Hub
 {
-    private readonly IHubContext<GameHub> _hubContext;
-    private readonly JoinRoomService _joinRoomService;
-    private readonly StartRoomGameService _startRoomGameService;
-    private readonly PerformCleanupService _performCleanupService;
-    private readonly SendProgressService _sendProgressService;
-    private readonly PowerUpService _powerUpService;
-    private readonly RestartGameService _restartGameService;
-    private readonly ChangeRoomSettingsService _changeSettingsService;
-    private readonly EndGameProcessService _endGameService;
-
-    public GameHub(
-        IHubContext<GameHub> hubContext,
-        JoinRoomService joinRoomService,
-        StartRoomGameService startRoomGameService,
-        PerformCleanupService performCleanupService,
-        SendProgressService sendProgressService,
-        PowerUpService powerUpService,
-        RestartGameService restartGameService,
-        ChangeRoomSettingsService changeSettingsService,
-        EndGameProcessService endGameService)
-    {
-        _hubContext = hubContext;
-        _joinRoomService = joinRoomService;
-        _startRoomGameService = startRoomGameService;
-        _performCleanupService = performCleanupService;
-        _sendProgressService = sendProgressService;
-        _powerUpService = powerUpService;
-        _restartGameService = restartGameService;
-        _changeSettingsService = changeSettingsService;
-        _endGameService = endGameService;
-    }
-
-
     public async Task<bool> JoinRoom(string HostCode)
     {
         string currentPlayer = Context.User?.Identity?.Name ?? "Unknown";

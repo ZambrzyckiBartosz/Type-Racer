@@ -3,9 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using TypeRacerServer.Core.State;
-using TypeRacerServer.Core.Services;
 using TypeRacerServer.Infrastructure;
+using TypeRacerServer.Core.Dependency;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -55,15 +54,7 @@ builder.Services.AddCors(options =>
 		policy.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod().AllowCredentials();
 	});
 });
-builder.Services.AddSingleton<GameState>();
-builder.Services.AddTransient<JoinRoomService>();
-builder.Services.AddTransient<StartRoomGameService>();
-builder.Services.AddTransient<PerformCleanupService>();
-builder.Services.AddTransient<SendProgressService>();
-builder.Services.AddTransient<PowerUpService>();
-builder.Services.AddTransient<RestartGameService>();
-builder.Services.AddTransient<ChangeRoomSettingsService>();
-builder.Services.AddTransient<EndGameProcessService>();
+builder.Services.AddCoreServices();
 var app = builder.Build();
 
 
