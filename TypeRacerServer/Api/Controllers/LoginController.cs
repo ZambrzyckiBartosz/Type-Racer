@@ -5,7 +5,7 @@ using TypeRacerServer.Api.Services;
 namespace TypeRacerServer.Api.Controllers;
 
 [ApiController]
-[Route("[api/controller]")]
+[Route("[controller]")]
 
 public class LoginController(LoginService _user) : ControllerBase
 {

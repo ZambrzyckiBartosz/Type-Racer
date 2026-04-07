@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using TypeRacerServer.Api.Requests;
-
+using TypeRacerServer.Infrastructure;
 namespace TypeRacerServer.Api.Services;
 
 

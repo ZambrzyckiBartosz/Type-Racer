@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using TypeRacerServer.Api.Requests;
-
+using TypeRacerServer.Infrastructure;
 namespace TypeRacerServer.Api.Services;
 
 public class LeaderboardSerivce(AppDbContext _context)

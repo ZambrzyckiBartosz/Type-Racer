@@ -4,7 +4,7 @@ using TypeRacerServer.Api.Services;
 namespace TypeRacerServer.Api.Controllers;
 
 [ApiController]
-[Route("[api/controller]")]
+[Route("[controller]")]
 
 public class SaveScoreController(SaveScoreService _context) : ControllerBase
 {
