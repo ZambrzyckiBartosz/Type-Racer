@@ -1,5 +1,5 @@
-using TypeRacerServer.Api.ValueObjects;
-namespace TypeRacerServer.Api.Requests;
+using TypeRacerServer.Core.ValueObjects;
+namespace TypeRacerServer.Core.Requests;
 
 public class SaveScoreRequest{
     public Username Username {get; set;} = string.Empty;

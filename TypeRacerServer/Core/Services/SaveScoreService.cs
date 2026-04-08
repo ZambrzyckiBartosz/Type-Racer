@@ -1,5 +1,5 @@
-using Microsoft.EntityFrameworkCore;
-using TypeRacerServer.Api.Requests;
+/*using Microsoft.EntityFrameworkCore;
+using TypeRacerServer.Core.Requests;
 using TypeRacerServer.Infrastructure;
 namespace TypeRacerServer.Api.Services;
 
@@ -26,4 +26,4 @@ public class SaveScoreService(AppDbContext _context)
 
         await _context.SaveChangesAsync();
     }
-}
+}*/

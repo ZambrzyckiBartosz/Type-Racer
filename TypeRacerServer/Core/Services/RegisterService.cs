@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Identity.Data;
+/*using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.EntityFrameworkCore;
-using TypeRacerServer.Api.Requests;
+using TypeRacerServer.Core.Requests;
 using TypeRacerServer.Infrastructure;
 namespace TypeRacerServer.Api.Services;
 
@@ -23,4 +23,4 @@ public class RegisterService(AppDbContext _context)
         _context.Users.Add(newUser);
         await _context.SaveChangesAsync();
     }
-}
+}*/

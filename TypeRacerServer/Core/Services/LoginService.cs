@@ -1,12 +1,10 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using TypeRacerServer.Api.Requests;
-using TypeRacerServer.Infrastructure;
+using TypeRacerServer.Core.Requests;
 
-namespace TypeRacerServer.Api.Services;
+namespace TypeRacerServer.Core.Services;
 
 public class LoginService(AppDbContext _context, IConfiguration _configuration)
 {

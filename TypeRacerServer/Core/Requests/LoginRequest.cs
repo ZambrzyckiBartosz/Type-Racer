@@ -1,6 +1,6 @@
-using TypeRacerServer.Api.ValueObjects;
+using TypeRacerServer.Core.ValueObjects;
 
-namespace TypeRacerServer.Api.Requests;
+namespace TypeRacerServer.Core.Requests;
 
 public class LoginRequest
 {

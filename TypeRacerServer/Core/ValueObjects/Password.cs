@@ -1,4 +1,4 @@
-namespace TypeRacerServer.Api.ValueObjects;
+namespace TypeRacerServer.Core.ValueObjects;
 
 public record Password
 {
