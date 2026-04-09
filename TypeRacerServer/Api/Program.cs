@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using TypeRacerServer.Api.Extensions;
 using TypeRacerServer.Core.Domain.Dependency;
 using TypeRacerServer.Infrastructure.Persistance;
 
@@ -12,35 +13,7 @@ string? jwtkey = builder.Configuration["JwtSettings:Key"];
 if(string.IsNullOrEmpty(jwtkey)){
 	throw new Exception("No jwt key");
 }
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
- {
-	 options.RequireHttpsMetadata = false;
- 	options.TokenValidationParameters = new TokenValidationParameters
- 	{
- 		ValidateIssuer = false,
- 		ValidateAudience = false,
- 		ValidateLifetime = true,
- 		ValidateIssuerSigningKey = true,
- 		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtkey))
- 	};
-
-    options.Events = new JwtBearerEvents
-    {
-	    OnMessageReceived = context =>
-	    {
-		    var accessToken = context.Request.Query["access_token"];
-		    var path = context.HttpContext.Request.Path;
-
-		    if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/gamehub"))
-		    {
-			    context.Token = accessToken;
-		    }
-		    return Task.CompletedTask;
-	    }
-    };
-
- });
-
+builder.Services.AddAuthenticationCustom(jwtkey);
 builder.Services.AddAuthorization();
 builder.Services.AddDbContext<AppDbContext>(options =>
 	options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));

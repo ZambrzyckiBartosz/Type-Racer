@@ -4,7 +4,6 @@ using TypeRacerServer.Core.Application.Services.LeaderboardManager;
 using TypeRacerServer.Core.Application.Services.PostGameManager;
 using TypeRacerServer.Core.Application.Services.RoomManager;
 using TypeRacerServer.Core.Domain.State;
-
 namespace TypeRacerServer.Core.Domain.Dependency;
 
 public static class DependencyInjection
