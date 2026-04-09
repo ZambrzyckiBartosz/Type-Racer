@@ -1,4 +1,3 @@
-using TypeRacerServer.Core.Requests;
 using TypeRacerServer.Core.Interfaces;
 using TypeRacerServer.Core.Models;
 

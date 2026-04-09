@@ -1,17 +1,19 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using TypeRacerServer.Core.Interfaces;
 using TypeRacerServer.Core.Requests;
 
 namespace TypeRacerServer.Core.Services;
 
-public class LoginService(AppDbContext _context, IConfiguration _configuration)
+public class LoginService(ILoginRepository _repository, IConfiguration _configuration)
 {
     public async Task<string> LoginHandler(LoginRequest loginRequest)
     {
         Console.WriteLine("Login Service Active");
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == loginRequest.Username);
+        var user = await _repository.Login(loginRequest.Username);
 
         if(user == null){
             throw new Exception("User not found");

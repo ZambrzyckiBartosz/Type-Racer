@@ -1,18 +1,19 @@
-/*using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using TypeRacerServer.Core.Interfaces;
 using TypeRacerServer.Core.Requests;
-using TypeRacerServer.Infrastructure;
-namespace TypeRacerServer.Api.Services;
+using TypeRacerServer.Core.ValueObjects;
+
+namespace TypeRacerServer.Core.Services;
 
 
-public class SaveScoreService(AppDbContext _context)
+public class SaveScoreService(ISaveScoreRepository _repository)
 {
-    public async Task SaveScoreHandler(SaveScoreRequest saveScoreRequest, HttpContext httpContext)
+    public async Task SaveScoreHandler(SaveScoreRequest saveScoreRequest, Username usernameFromToken)
     {
-        var usernameFromToken = httpContext.User.Identity?.Name;
         if(string.IsNullOrEmpty(usernameFromToken)){
             throw new Exception("Invalid username");
         }
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == saveScoreRequest.Username);
+        var user = await _repository.getUser(usernameFromToken);
         if(user == null){
             throw new Exception("User not found");
         }
@@ -24,6 +25,6 @@ public class SaveScoreService(AppDbContext _context)
             user.HighScoreWpm = saveScoreRequest.WPM;
         }
 
-        await _context.SaveChangesAsync();
+        await _repository.saveScore();
     }
-}*/
+}

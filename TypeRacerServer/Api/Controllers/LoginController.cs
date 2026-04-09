@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using TypeRacerServer.Api.Requests;
-using TypeRacerServer.Api.Services;
+using TypeRacerServer.Core.Requests;
+using TypeRacerServer.Core.Services;
 
 namespace TypeRacerServer.Api.Controllers;
 

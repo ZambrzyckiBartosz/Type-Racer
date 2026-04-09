@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using TypeRacerServer.Api.Requests;
-using TypeRacerServer.Api.Services;
+using TypeRacerServer.Core.Requests;
+using TypeRacerServer.Core.Services;
+
 namespace TypeRacerServer.Api.Controllers;
 
 [ApiController]
@@ -12,7 +13,8 @@ public class SaveScoreController(SaveScoreService _context) : ControllerBase
 
     public async Task<ActionResult> SaveScore([FromBody] SaveScoreRequest saveScoreRequest, HttpContext httpContext)
     {
-        await _context.SaveScoreHandler(saveScoreRequest, httpContext);
+        var usernameFromToken = httpContext.User.Identity?.Name;
+        await _context.SaveScoreHandler(saveScoreRequest, usernameFromToken);
         return Ok();
     }
 }
