@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using TypeRacerServer.Core.Requests;
-using TypeRacerServer.Core.Services;
+using TypeRacerServer.Core.Application.Requests.SavingStats;
+using TypeRacerServer.Core.Application.Services.PostGameManager;
 
 namespace TypeRacerServer.Api.Controllers;
 

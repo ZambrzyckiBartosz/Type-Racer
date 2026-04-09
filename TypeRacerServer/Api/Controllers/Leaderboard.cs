@@ -1,5 +1,4 @@
-using TypeRacerServer.Core.Requests;
-using TypeRacerServer.Core.Services;
+using TypeRacerServer.Core.Application.Services.LeaderboardManager;
 
 namespace TypeRacerServer.Api.Controllers;
 

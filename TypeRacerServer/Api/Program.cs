@@ -3,8 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using TypeRacerServer.Infrastructure;
-using TypeRacerServer.Core.Dependency;
+using TypeRacerServer.Core.Domain.Dependency;
+using TypeRacerServer.Infrastructure.Persistance;
 
 var builder = WebApplication.CreateBuilder(args);
 

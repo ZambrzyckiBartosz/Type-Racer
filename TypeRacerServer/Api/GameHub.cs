@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.SignalR;
-using TypeRacerServer.Core.Services;
 using Microsoft.AspNetCore.Authorization;
+using TypeRacerServer.Core.Application.Services.GameManager;
+using TypeRacerServer.Core.Application.Services.LeaderboardManager;
+using TypeRacerServer.Core.Application.Services.PostGameManager;
+using TypeRacerServer.Core.Application.Services.RoomManager;
+
 namespace TypeRacerServer;
 
 [Authorize]
