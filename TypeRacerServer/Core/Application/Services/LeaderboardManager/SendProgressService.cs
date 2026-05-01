@@ -69,6 +69,7 @@ public class SendProgressService(GameState _gameState)
                 if (room.SecondsToEnd > 0)
                 {
                     result.ShouldStartEndGameTimer = true;
+                    result.SecondsToEnd = room.SecondsToEnd;
                 }
                 else result.ShouldEndGameImmediately = true;
             }

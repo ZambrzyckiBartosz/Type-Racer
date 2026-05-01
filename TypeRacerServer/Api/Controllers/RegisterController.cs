@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using TypeRacerServer.Core.Application.Requests.AccountManager;
 using TypeRacerServer.Core.Application.Services.AccountManager;
@@ -5,12 +6,14 @@ using TypeRacerServer.Core.Application.Services.AccountManager;
 namespace TypeRacerServer.Api.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 
-public class RegisterController(RegisterService registerService)
+public class RegisterController(RegisterService registerService) : ControllerBase
 {
-    public async Task RegisterUser(RegisterRequestByMe registerRequest)
+    [HttpPost]
+    public async Task<ActionResult> RegisterUser([FromBody] RegisterRequestByMe registerRequest)
     {
         await registerService.RegisterHandler(registerRequest);
+        return Ok();
     }
 }

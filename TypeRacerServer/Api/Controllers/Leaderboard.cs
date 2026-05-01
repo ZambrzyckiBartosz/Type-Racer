@@ -1,11 +1,16 @@
+using Microsoft.AspNetCore.Mvc;
 using TypeRacerServer.Core.Application.Services.LeaderboardManager;
 
 namespace TypeRacerServer.Api.Controllers;
 
-public class Leaderboard(LeaderboardSerivce _context)
+[ApiController]
+[Route("api/[controller]")]
+public class Leaderboard(LeaderboardSerivce _context) : ControllerBase
 {
-    public async Task LeaderboardPrinter()
+    [HttpGet]
+    public async Task<IActionResult> LeaderboardPrinter()
     {
-        await _context.Leaderboard();
+        var data = await _context.Leaderboard();
+        return Ok(data);
     }
 }

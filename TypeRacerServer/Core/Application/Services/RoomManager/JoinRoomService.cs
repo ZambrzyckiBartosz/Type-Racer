@@ -12,7 +12,7 @@ public class JoinRoomService(GameState _gameState)
         var result = new JoinRoomResult();
         string newCid = connectionId;
         var room = _gameState.Rooms.GetOrAdd(HostCode, _ => new RoomState());
-
+        Console.WriteLine($"New player in lobby: {newCid}, Host code: {HostCode} with nickname : {currentPlayer}");
         var oldSessionEntry = _gameState.Sessions.FirstOrDefault(s => s.Value.Nickname == currentPlayer && s.Value.RoomCode == HostCode);
         if (oldSessionEntry.Key != null)
         {
@@ -37,7 +37,6 @@ public class JoinRoomService(GameState _gameState)
             result.isSucces = true;
             result.NeedsLobbySetup = true;
             result.State = room;
-            return result;
 
         }
 

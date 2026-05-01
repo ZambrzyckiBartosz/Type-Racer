@@ -2,8 +2,8 @@
 
   <PropertyGroup>
       <TargetFramework>net10.0</TargetFramework>
-      <Nullable>enable</Nullable>
       <ImplicitUsings>enable</ImplicitUsings>
+      <Nullable>enable</Nullable>
       <UserSecretsId>d4048780-ab27-40cf-8931-c0a999d697e0</UserSecretsId>
   </PropertyGroup>
 

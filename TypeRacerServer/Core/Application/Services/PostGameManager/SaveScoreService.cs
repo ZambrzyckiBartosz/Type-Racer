@@ -7,7 +7,7 @@ namespace TypeRacerServer.Core.Application.Services.PostGameManager;
 
 public class SaveScoreService(ISaveScoreRepository _repository)
 {
-    public async Task SaveScoreHandler(SaveScoreRequest saveScoreRequest, Username usernameFromToken)
+    public async Task SaveScoreHandler(SaveScoreRequest saveScoreRequest, string usernameFromToken)
     {
         if(string.IsNullOrEmpty(usernameFromToken)){
             throw new Exception("Invalid username");

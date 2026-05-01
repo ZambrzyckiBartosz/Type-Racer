@@ -97,7 +97,7 @@ public class GameHub(IHubContext<GameHub> _hubContext, JoinRoomService _joinRoom
         {
             _ = Task.Run(async () =>
             {
-                await Task.Delay(10000);
+                await Task.Delay(1000 * result.SecondsToEnd);
                 await ExecuteEndGame(result.RoomCode);
             });
         }

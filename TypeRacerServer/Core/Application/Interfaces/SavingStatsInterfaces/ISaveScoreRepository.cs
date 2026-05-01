@@ -5,6 +5,6 @@ namespace TypeRacerServer.Core.Application.Interfaces.SavingStatsInterfaces;
 
 public interface ISaveScoreRepository
 {
-    Task<User?> getUser(Username username);
+    Task<User?> getUser(string username);
     Task saveScore();
 }

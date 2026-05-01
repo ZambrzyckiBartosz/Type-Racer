@@ -12,6 +12,7 @@ public class SendProgressResult
     public bool TriggerHardModeFail {get; set;} = false;
     public bool ShouldEndGameImmediately {get; set;} = false;
     public bool ShouldStartEndGameTimer {get; set;} = false;
+    public int SecondsToEnd {get; set;} = 0;
     public string RoomCode {get; set;} = string.Empty;
     public string PlayerNick {get; set;} = string.Empty;
 }

@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using TypeRacerServer.Core.Application.Interfaces.AccountManagerInterfaces;
 using TypeRacerServer.Core.Application.Requests.AccountManager;
+using TypeRacerServer.Core.Domain.ValueObjects;
 
 namespace TypeRacerServer.Core.Application.Services.AccountManager;
 
@@ -18,13 +19,14 @@ public class LoginService(ILoginRepository _repository, IConfiguration _configur
         if(user == null){
             throw new Exception("User not found");
         }
-        bool isPasswordValid = BCrypt.Net.BCrypt.Verify(loginRequest.Password,user.PasswordHash);
+        var tempPassword = new Password(loginRequest.Password);
+        bool isPasswordValid = BCrypt.Net.BCrypt.Verify(tempPassword,user.PasswordHash);
         if(!isPasswordValid){
             throw new Exception("Wrong password");
         }
 
         var TokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"] ?? "ojapidifido;suf833238fkjadsal");
+        var key = Encoding.UTF8.GetBytes(_configuration["JwtSettings:Key"] ?? "ojapidifido;suf833238fkjadsal");
         var tokenDescriptor = new SecurityTokenDescriptor{
             Subject = new ClaimsIdentity(new[] {new Claim(ClaimTypes.Name, user.Username)}),
             Expires = DateTime.UtcNow.AddDays(3),

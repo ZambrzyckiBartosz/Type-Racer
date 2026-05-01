@@ -7,7 +7,7 @@ namespace TypeRacerServer.Infrastructure.Persistance.Repositories;
 
 public class SaveScoreRepository(AppDbContext _context) : ISaveScoreRepository
 {
-    public async Task<User?> getUser(Username username)
+    public async Task<User?> getUser(string username)
     {
         return await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
     }

@@ -1,69 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import Auth from './Auth';
 import { useGameLogic } from './GameLogic';
 import './Chat.css';
 import './Game.css';
-
-function Chat({ currentPlayer, chatMessages, sendChatMessage }) {
-    const [inputValue, setInputValue] = useState("");
-    const messagesEndRef = useRef(null);
-
-    const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    };
-
-    useEffect(() => {
-        scrollToBottom();
-    }, [chatMessages]);
-
-    const handleSend = () => {
-        if (inputValue.trim() === "") return;
-        sendChatMessage(inputValue.trim());
-        setInputValue("");
-    };
-
-    const handleKeyDown = (e) => {
-        if (e.key === 'Enter') {
-            handleSend();
-        }
-    };
-
-    return (
-        <div className="glass-panel-sm chat-container" style={{ width: '100%', maxWidth: '400px', margin: '0 auto', padding: '15px' }}>
-            <div className="chat-header" style={{ marginBottom: '10px' }}>
-                <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#00f0ff' }}>Room Chat</h3>
-            </div>
-            
-            <div className="message-display" style={{ maxHeight: '150px', overflowY: 'auto', marginBottom: '10px' }}>
-                {chatMessages && chatMessages.map((msg, index) => (
-                    <div key={index} className={`message ${msg.type}`} style={{ padding: '5px', color: msg.type === 'received' ? '#ccc' : '#fff' }}>
-                        {msg.type === "received" && (
-                            <div style={{ fontSize: '0.7rem', opacity: 0.7, color: '#bd00ff' }}>{msg.sender}</div>
-                        )}
-                        {msg.text}
-                    </div>
-                ))}
-                <div ref={messagesEndRef} />
-            </div>
-
-            <div className="chat-input-area" style={{ display: 'flex', gap: '10px' }}>
-                <input 
-                    type="text" 
-                    className="cyber-input"
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                    placeholder="Type a message..." 
-                    autoComplete="off"
-                    style={{ padding: '10px', fontSize: '0.9rem' }}
-                />
-                <button className="btn btn-primary" onClick={handleSend} style={{ padding: '10px 15px' }}>
-                    Send
-                </button>
-            </div>
-        </div>
-    );
-}
 
 function App() {
     const { 
@@ -204,14 +143,6 @@ function App() {
                         </div>
                     </div>
 
-                 {  /* <div style={{ marginBottom: '30px' }}>
-                        <Chat 
-                            currentPlayer={session.username} 
-                            chatMessages={room.chat} 
-                            sendChatMessage={actions.sendChatMessage} 
-                        />
-                    </div> */}
-
                     {session.username === room.host && (
                         <button className="btn btn-start-massive" onClick={actions.handleStart}>
                             Start Race
@@ -281,7 +212,26 @@ function App() {
                     )}
 
                     {game.countdown === 0 && player.input.length > 0 && game.status !== 'finished' && (
-                        <div style={{ height: '86px' }}></div>
+                        <div style={{ height: '86px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            {game.timeRemaining !== null && game.timeRemaining > 0 && (
+                                <div style={{
+                                    textAlign: 'center',
+                                    fontSize: '42px', 
+                                    color: '#ff4444',
+                                    fontWeight: 'bold',
+                                    textShadow: '0 0 15px rgba(255, 68, 68, 0.8)',
+                                    animation: 'pulse 1s infinite'
+                                }}>
+                                    Time to end: {game.timeRemaining}s
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                    {game.timeRemaining === 0 && game.status !== 'finished' && (
+                        <div style={{ textAlign: 'center', fontSize: '32px', color: '#ff9900', fontWeight: 'bold', animation: 'pulse 0.5s infinite' }}>
+                         FINISHING RACE...
+                    </div>
                     )}
                     
                     {game.status === 'finished' && (
@@ -325,7 +275,7 @@ function App() {
                         placeholder={game.countdown > 0 ? "Prepare..." : "Start"}
                     />
 
-                    {game.status !== 'finished' && (
+                    {game.status !== 'finished' && room.settings.powerUpsEnabled && (
                         <>
                             <div className="progress-track" style={{ height: '6px', marginTop: '15px' }}>
                                 <div

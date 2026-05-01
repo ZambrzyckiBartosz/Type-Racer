@@ -5,16 +5,16 @@ using TypeRacerServer.Core.Application.Services.PostGameManager;
 namespace TypeRacerServer.Api.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 
 public class SaveScoreController(SaveScoreService _context) : ControllerBase
 {
     [HttpPost]
 
-    public async Task<ActionResult> SaveScore([FromBody] SaveScoreRequest saveScoreRequest, HttpContext httpContext)
+    public async Task<ActionResult> SaveScore([FromBody] SaveScoreRequest saveScoreRequest)
     {
-        var usernameFromToken = httpContext.User.Identity?.Name;
-        await _context.SaveScoreHandler(saveScoreRequest, usernameFromToken);
+        string? usernameFromToken = this.HttpContext.User.Identity?.Name;
+        await _context.SaveScoreHandler(saveScoreRequest, usernameFromToken ?? throw new InvalidOperationException());
         return Ok();
     }
 }

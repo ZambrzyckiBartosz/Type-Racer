@@ -5,5 +5,5 @@ namespace TypeRacerServer.Core.Application.Interfaces.AccountManagerInterfaces;
 
 public interface ILoginRepository
 {
-     Task<User?> Login(Username Nickname);
+     Task<User?> Login(string Nickname);
 }

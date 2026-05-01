@@ -27,7 +27,9 @@ public class EndGameProcessService(GameState _gameState)
             .ThenBy(p => Guid.NewGuid())
             .ToList();
 
-        string winnerNick = sorted.FirstOrDefault()?.Nickname ?? "None";
+        string? winnerNick = sorted.FirstOrDefault()?.Nickname;
+        if(winnerNick == null) return "None";
+        if(room.HardMode && string.IsNullOrEmpty(winnerNick)) return "No survivors"; 
         return winnerNick;
     }
 }
