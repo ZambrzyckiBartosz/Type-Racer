@@ -1,6 +1,6 @@
 namespace TypeRacerServer.Core.Application.Models.RoomResults;
 
-public class JoinRoomResult
+public record JoinRoomResult
 {
     public bool isSucces {get; set;}
     public bool NeedsLobbySetup {get; set;}

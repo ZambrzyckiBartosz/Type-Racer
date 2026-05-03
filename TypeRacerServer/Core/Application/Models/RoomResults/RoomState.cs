@@ -1,6 +1,6 @@
 using System.Collections.Concurrent;
 namespace TypeRacerServer.Core.Application.Models.RoomResults;
-public class RoomState
+public record RoomState
 {
     public string TargetText { get; set; } = string.Empty;
     public ConcurrentDictionary<string, string> Players { get; set; } = new();

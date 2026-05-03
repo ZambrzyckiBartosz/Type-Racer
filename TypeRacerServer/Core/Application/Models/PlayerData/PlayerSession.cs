@@ -1,5 +1,5 @@
 namespace TypeRacerServer.Core.Application.Models.PlayerData;
-public class PlayerSession
+public record PlayerSession
 {
     public string Nickname { get; set; } = string.Empty;
     public string RoomCode { get; set; } = string.Empty;

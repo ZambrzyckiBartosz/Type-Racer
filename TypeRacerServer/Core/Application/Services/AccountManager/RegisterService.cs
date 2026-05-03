@@ -13,8 +13,8 @@ public class RegisterService(IRegisterRepository _repository)
             throw new InvalidOperationException("Username already exists");
         }
         
-        var usernameSave = new Username(request.Username);
-        var  passwordSave = new Password(request.Password);
+        var usernameSave = request.Username;
+        var  passwordSave = request.Password;
         await _repository.SaveNewUser(usernameSave, BCrypt.Net.BCrypt.HashPassword(passwordSave));
     }
 }

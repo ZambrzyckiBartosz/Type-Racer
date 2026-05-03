@@ -2,7 +2,7 @@ using TypeRacerServer.Core.Domain.ValueObjects;
 
 namespace TypeRacerServer.Core.Application.Models.PlayerData;
 
-public class TopPlayers
+public record TopPlayers
 {
     public string? Username { get; set; }
     public uint HighScoreWpm { get; set; }

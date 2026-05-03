@@ -1,6 +1,6 @@
 namespace TypeRacerServer.Core.Application.Models.PostGameResults;
 
-public class SendProgressResult
+public record SendProgressResult
 {
     public int Progress {get; set;} = 0;
     public int Wpm {get; set;} = 0;

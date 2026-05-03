@@ -6,12 +6,12 @@ using TypeRacerServer.Core.Domain.ValueObjects;
 namespace TypeRacerServer.Infrastructure.Persistance.Repositories;
 public class RegisterRepository(AppDbContext _context) : IRegisterRepository
 {
-    public async Task<bool> Exists(Username username)
+    public async Task<bool> Exists(string username)
     {
         return await _context.Users.AnyAsync(u => u.Username == username);
     }
 
-    public async Task SaveNewUser(Username nickname, Password password)
+    public async Task SaveNewUser(string nickname, string password)
     {
         var newUser = new User
         {

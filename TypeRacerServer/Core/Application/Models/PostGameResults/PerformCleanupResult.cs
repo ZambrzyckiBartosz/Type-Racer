@@ -2,7 +2,7 @@ using TypeRacerServer.Core.Application.Models.RoomResults;
 
 namespace TypeRacerServer.Core.Application.Models.PostGameResults;
 
-public class PerformCleanupResult
+public record PerformCleanupResult
 {
     public bool isRemoved {get; set;}
     public bool isRommEmpty {get; set;}
