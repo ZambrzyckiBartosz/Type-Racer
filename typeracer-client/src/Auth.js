@@ -26,8 +26,6 @@ function Auth({ onLoginSuccess }) {
         if (isLoginMode) {
           const data = await response.json();
 
-          console.log("data server: ", data);
-
           localStorage.setItem("token", data.token || data.Token);
           localStorage.setItem("username", username);
 
@@ -53,82 +51,75 @@ function Auth({ onLoginSuccess }) {
   };
 
   return (
-    <div
-      style={{
-        padding: "20px",
-        backgroundColor: "#2a2a35",
-        color: "white",
-        borderRadius: "8px",
-        maxWidth: "300px",
-        margin: "40px auto",
-        textAlign: "center",
-        fontFamily: "sans-serif",
-      }}
-    >
-      <h2>{isLoginMode ? "Login" : "Register"}</h2>
-      <form onSubmit={handleSubmit}>
+    <div style={{ width: "100%", padding: "10px" }}>
+      <h2 style={{
+        color: "var(--cyan)",
+        fontFamily: "var(--mono)",
+        textTransform: "uppercase",
+        letterSpacing: "4px",
+        marginBottom: "30px",
+        textShadow: "var(--cyan-glow)"
+      }}>
+        {isLoginMode ? "Login" : "Register"}
+      </h2>
+      
+      <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
         <input
           type="text"
-          placeholder="Player name"
+          placeholder="PLAYER NAME"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
-          style={{
-            display: "block",
-            margin: "10px 0",
-            color: "#000",
-            backgroundColor: "#FFF",
-            padding: "10px",
-            width: "100%",
-            boxSizing: "border-box",
-            borderRadius: "4px",
-            border: "none",
-          }}
+          className="cyber-input"
+          style={{ width: "100%", textAlign: "center", fontSize: "18px", letterSpacing: "2px" }}
         />
         <input
           type="password"
-          placeholder="Password"
+          placeholder="PASSWORD"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          style={{
-            display: "block",
-            margin: "10px 0",
-            color: "#000",
-            backgroundColor: "#FFF",
-            padding: "10px",
-            width: "100%",
-            boxSizing: "border-box",
-            borderRadius: "4px",
-            border: "none",
-          }}
+          className="cyber-input"
+          style={{ width: "100%", textAlign: "center", fontSize: "18px", letterSpacing: "2px" }}
         />
         <button
           type="submit"
           style={{
-            padding: "10px",
-            width: "100%",
-            cursor: "pointer",
-            backgroundColor: isLoginMode ? "#2196f3" : "#4CAF50",
-            color: "white",
-            border: "none",
-            borderRadius: "4px",
+            marginTop: "10px",
+            padding: "15px",
+            fontSize: "18px",
+            fontFamily: "var(--mono)",
             fontWeight: "bold",
+            letterSpacing: "3px",
+            color: isLoginMode ? "var(--cyan)" : "var(--green)",
+            border: `1px solid ${isLoginMode ? 'var(--cyan)' : 'var(--green)'}`,
+            background: isLoginMode ? "rgba(0,240,255,0.05)" : "rgba(0,255,140,0.05)",
+            boxShadow: isLoginMode ? "var(--cyan-glow)" : "var(--green-glow)",
+            cursor: "pointer",
+            transition: "all 0.2s ease",
+            textTransform: "uppercase",
+            borderRadius: "6px"
+          }}
+          onMouseEnter={(e) => {
+              e.target.style.background = isLoginMode ? "rgba(0,240,255,0.15)" : "rgba(0,255,140,0.15)";
+              e.target.style.transform = "scale(1.02)";
+          }}
+          onMouseLeave={(e) => {
+              e.target.style.background = isLoginMode ? "rgba(0,240,255,0.05)" : "rgba(0,255,140,0.05)";
+              e.target.style.transform = "scale(1)";
           }}
         >
           {isLoginMode ? "Log In" : "Create Account"}
         </button>
       </form>
+
       {message && (
-        <p style={{ marginTop: "15px", color: "#ffb86c" }}>{message}</p>
+        <p style={{ marginTop: "20px", color: "var(--orange)", fontFamily: "var(--mono)", fontWeight: "bold" }}>
+          {message}
+        </p>
       )}
-      <div
-        style={{
-          marginTop: "20px",
-          borderTop: "1px solid #444",
-          paddingTop: "15px",
-        }}
-      >
+
+      <div style={{ marginTop: "30px", borderTop: "1px solid var(--border)", paddingTop: "20px" }}>
         <button
           onClick={() => {
             setIsLoginMode(!isLoginMode);
@@ -137,14 +128,18 @@ function Auth({ onLoginSuccess }) {
           style={{
             background: "none",
             border: "none",
-            color: "#ff9800",
+            color: "rgba(255,255,255,0.4)",
             cursor: "pointer",
-            textDecoration: "underline",
+            fontFamily: "var(--ui)",
+            fontSize: "14px",
+            letterSpacing: "1px",
+            textTransform: "uppercase",
+            transition: "color 0.2s"
           }}
+          onMouseEnter={(e) => e.target.style.color = "var(--cyan)"}
+          onMouseLeave={(e) => e.target.style.color = "rgba(255,255,255,0.4)"}
         >
-          {isLoginMode
-            ? "Need an account? Register"
-            : "Have an account? Log in"}
+          {isLoginMode ? "NEED AN ACCOUNT? REGISTER" : "HAVE AN ACCOUNT? LOG IN"}
         </button>
       </div>
     </div>
