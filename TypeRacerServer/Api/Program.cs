@@ -4,21 +4,12 @@ using TypeRacerServer.Api.Extensions;
 using TypeRacerServer.Core.Application.Interfaces.AccountManagerInterfaces;
 using TypeRacerServer.Core.Application.Interfaces.LeaderboardInterfaces;
 using TypeRacerServer.Core.Application.Interfaces.SavingStatsInterfaces;
-using TypeRacerServer.Core.Application.Services.AccountManager;
-using TypeRacerServer.Core.Application.Services.GameManager;
-using TypeRacerServer.Core.Application.Services.LeaderboardManager;
-using TypeRacerServer.Core.Application.Services.PostGameManager;
-using TypeRacerServer.Core.Application.Services.RoomManager;
-using TypeRacerServer.Core.Domain.Constant;
 using TypeRacerServer.Core.Domain.Dependency;
-using TypeRacerServer.Core.Domain.State;
 using TypeRacerServer.Infrastructure.Persistance;
 using TypeRacerServer.Infrastructure.Persistance.Repositories;
-
+using TypeRacerServer.Api.Middlewares;
 var builder = WebApplication.CreateBuilder(args);
 
-Microsoft.IdentityModel.Logging.IdentityModelEventSource.ShowPII = true;
-Microsoft.IdentityModel.Logging.IdentityModelEventSource.LogCompleteSecurityArtifact = true;
 
 string? jwtkey = builder.Configuration["JwtSettings:Key"];
 if(string.IsNullOrEmpty(jwtkey)){
@@ -31,23 +22,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddSignalR();
 builder.Services.AddControllers();
+builder.Services.CustomRateLimiting();
 builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 builder.Services.AddScoped<IRegisterRepository, RegisterRepository>();
-builder.Services.AddSingleton<GameState>();
 builder.Services.AddScoped<ILeaderboardRepository, LeaderboardRepository>();
 builder.Services.AddScoped<ISaveScoreRepository, SaveScoreRepository>();
-builder.Services.AddScoped<LoginService>();
-builder.Services.AddScoped<RegisterService>();
-builder.Services.AddTransient<JoinRoomService>();
-builder.Services.AddTransient<ChangeRoomSettingsService>();
-builder.Services.AddTransient<RestartGameService>();
-builder.Services.AddTransient<StartRoomGameService>();
-builder.Services.AddTransient<PowerUpService>();
-builder.Services.AddTransient<LeaderboardSerivce>();
-builder.Services.AddTransient<SendProgressService>();
-builder.Services.AddTransient<EndGameProcessService>();
-builder.Services.AddTransient<PerformCleanupService>();
-builder.Services.AddTransient<SaveScoreService>();
 builder.Services.AddCors(options =>
 {
 	options.AddPolicy("ReactPolicy", policy => 
@@ -61,7 +40,8 @@ var app = builder.Build();
 
 
 app.UseCors("ReactPolicy");
-
+app.UseMiddleware<PerformanceLoggerMiddleware>();
+app.UseRateLimiter();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
